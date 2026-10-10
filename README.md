@@ -1,24 +1,14 @@
-# Pixel Perfect
+# NeuralVarsity.ai Blog Studio
 
-Implement exactly the screenshot and nothing else
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/b033102c-1ed3-4b2f-9140-d723cd2fc74e).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Write, manage, and publish NeuralVarsity.ai articles.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+You need Node.js and npm.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
 npm i
 npm run dev
 ```
+
+The app runs at http://localhost:8080. Supabase credentials belong in `.env`, which is not committed.

@@ -115,6 +115,9 @@
   transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
   &:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border)); }
 }
+@utility brand-crest {
+  filter: drop-shadow(0 12px 22px oklch(0.12 0.05 250 / 42%));
+}
 @utility bg-brand { background-image: var(--gradient-brand); }
 @utility text-brand {
   background-image: var(--gradient-brand);

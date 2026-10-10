@@ -6,7 +6,7 @@ import {
   CheckCircle2, Settings, ChevronsLeft, Moon, Sun, Bell, Plus, Shield, History, LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/nv-logo.png.asset.json";
+import { BrandMark } from "@/components/BrandMark";
 import { supabase } from "@/integrations/supabase/client";
 import { roleLabel, useMe, invalidate } from "@/lib/blog-store";
 
@@ -36,8 +36,8 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen w-full">
       <aside className={cn("glass sticky top-0 z-20 hidden h-screen shrink-0 flex-col rounded-none border-y-0 border-l-0 transition-all duration-300 md:flex", collapsed ? "w-[72px]" : "w-64")}>
-        <div className="flex h-16 items-center gap-2.5 px-4">
-          <div className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-foreground p-0.5"><img src={logo.url} alt="NeuralVarsity logo" className="size-full object-contain" /></div>
+        <div className={cn("flex h-[4.75rem] items-center gap-2.5", collapsed ? "justify-center px-2" : "px-4")}>
+          <BrandMark />
           {!collapsed && <div className="font-display text-sm font-bold leading-tight">NeuralVarsity<span className="text-brand">.ai</span><div className="text-[11px] font-medium text-muted-foreground">Blog Studio</div></div>}
         </div>
         <nav className="flex-1 space-y-0.5 overflow-y-auto px-3 py-2">
@@ -60,6 +60,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="glass sticky top-0 z-10 flex h-16 items-center gap-2 rounded-none border-x-0 border-t-0 px-4 md:px-8">
+          <BrandMark className="md:hidden" />
           <GlobalSearch />
           <div className="ml-auto flex items-center gap-2">
             <button onClick={() => setDark(!dark)} className="btn px-2.5" aria-label="Toggle theme">{dark ? <Sun className="size-4" /> : <Moon className="size-4" />}</button>

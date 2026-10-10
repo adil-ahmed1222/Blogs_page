@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { BrandMark } from "@/components/BrandMark";
 
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
@@ -30,7 +31,8 @@ function Page() {
   return (
     <div className="grid min-h-screen place-items-center px-4">
       <form onSubmit={submit} className="glass w-full max-w-md space-y-4 rounded-3xl p-8">
-        <h1 className="text-2xl font-bold">Set a new password</h1>
+        <div className="flex justify-center"><BrandMark /></div>
+        <h1 className="text-center text-2xl font-bold">Set a new password</h1>
         <input type="password" minLength={8} required className="field" placeholder="New password (8+ characters)" value={pw} onChange={(e) => setPw(e.target.value)} />
         <button className="btn-primary w-full justify-center" disabled={busy}>Update password</button>
       </form>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import logo from "@/assets/nv-logo.png.asset.json";
+import { BrandMark } from "@/components/BrandMark";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/auth")({
@@ -73,7 +73,7 @@ function AuthPage() {
     <div className="grid min-h-screen place-items-center px-4">
       <div className="glass w-full max-w-md rounded-3xl p-8 animate-in fade-in zoom-in-95">
         <div className="flex flex-col items-center text-center">
-          <div className="grid size-20 place-items-center rounded-2xl bg-foreground p-1"><img src={logo.url} alt="NeuralVarsity logo" className="size-full object-contain" /></div>
+          <BrandMark size="lg" />
           <h1 className="mt-4 text-2xl font-bold">NeuralVarsity<span className="text-brand">.ai</span> Blog Studio</h1>
           <p className="mt-1 text-sm text-muted-foreground">{mode === "signin" ? "Welcome back. Sign in to continue." : mode === "signup" ? "Create your writer account." : "We'll email you a reset link."}</p>
         </div>

@@ -18,7 +18,7 @@ export const askAi = createServerFn({ method: "POST" })
       }),
     });
     if (res.status === 429) return { text: "", error: "Too many requests — try again in a moment." };
-    if (res.status === 402) return { text: "", error: "AI credits are used up. Add credits in workspace settings." };
+    if (res.status === 402) return { text: "", error: "AI credits are used up." };
     if (!res.ok) return { text: "", error: "AI request failed." };
     const j = (await res.json()) as { choices?: { message?: { content?: string } }[] };
     return { text: j.choices?.[0]?.message?.content ?? "", error: null };
