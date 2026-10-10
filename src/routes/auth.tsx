@@ -34,7 +34,15 @@ function AuthPage() {
     e.preventDefault();
     setBusy(true);
     try {
-      if (mode === "signin") {
+      if (mode === "signin" || mode === "signup") {
+        if (mode === "signup") {
+          const { error: signUpError } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { full_name: name } },
+          });
+          if (signUpError) throw signUpError;
+        }
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         const { data: prof } = await supabase.from("profiles").select("deactivated_at").eq("id", data.user.id).maybeSingle();
@@ -46,14 +54,6 @@ function AuthPage() {
         if (remember) localStorage.removeItem("nv-forget");
         else { localStorage.setItem("nv-forget", "1"); sessionStorage.setItem("nv-session", "1"); }
         nav({ to: "/dashboard" });
-      } else if (mode === "signup") {
-        const { data, error } = await supabase.auth.signUp({
-          email, password,
-          options: { emailRedirectTo: `${window.location.origin}/dashboard`, data: { full_name: name } },
-        });
-        if (error) throw error;
-        if (data.session) nav({ to: "/dashboard" });
-        else { toast.success("Check your email to confirm your account."); setMode("signin"); }
       } else {
         const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` });
         if (error) throw error;
@@ -61,7 +61,10 @@ function AuthPage() {
         setMode("signin");
       }
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Something went wrong");
+      const message = err instanceof Error ? err.message : "Something went wrong";
+      toast.error(/email not confirmed/i.test(message)
+        ? "Email confirmation is still turned on for this Supabase project, so sign-in is rejected until that setting is off."
+        : message);
     }
     setBusy(false);
   };
